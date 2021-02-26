@@ -11,11 +11,10 @@ public class MainScenesController : MonoBehaviour
     private void Awake()
     {
         GameManagerSingleton.GetInstance.init();
-        Debug.Log(GameManagerSingleton.GetInstance.placeState);
     }
-    public void LoadTargetScene(string CityName)
+    public void LoadTargetScene(int cityIndex)
     {
-        GameManagerSingleton.GetInstance.placeState = CityName;
+        GameManagerSingleton.GetInstance.placeState = cityIndex;
         SceneManager.LoadScene(cityScene);
     }
 }

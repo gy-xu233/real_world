@@ -16,10 +16,22 @@ public class GameManagerSingleton
             return instance;
         }
     }
-    public string placeState;
+    public int placeState;
+    public List<Character> characterList;
     public void init()
     {
-        placeState = "map";
+        if(characterList == null)
+        {
+            characterList = new List<Character>();
+            placeState = 0;
+            for (int i = 0; i < 100; i++)
+            {
+                string name = "人物" + i.ToString();
+                int cityIndex = Random.Range(1, 7);
+                characterList.Add(new Character(i, name, cityIndex));
+                CityList.cityList[cityIndex].addCharacter(characterList[i]);
+            }
+        }
     }
 
 }
