@@ -54,10 +54,19 @@ public class CityUIController : MonoBehaviour
                 characterRowCash[i].SetActive(false);
             }
         }
+        Debug.Log("refresh panel");
     }
+
+    public void changePanelEnabled()
+    {
+        tempScrollRect.gameObject.SetActive(!tempScrollRect.gameObject.activeSelf);
+    }
+
+    
 
     public void LoadMapScene()
     {
+        GameManagerSingleton.GetInstance.placeState = 0;
         SceneManager.LoadScene("MainScene");
     }
 }
