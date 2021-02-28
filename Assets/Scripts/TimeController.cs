@@ -52,10 +52,7 @@ public class TimeController : MonoBehaviour
 
     private void refreshTimeText()
     {
-        timeYear = GameManagerSingleton.GetInstance.timeYear;
-        timeMonth = GameManagerSingleton.GetInstance.timeMonth;
-        timeDay = GameManagerSingleton.GetInstance.timeDay;
-        timeText.text = timeYear.ToString() + "年" + timeMonth.ToString() + "月" + timeDay.ToString() + "日";
+        timeText.text = GameManagerSingleton.GetInstance.timeText;
     }
 
 }

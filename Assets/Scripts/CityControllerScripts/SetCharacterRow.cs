@@ -8,6 +8,6 @@ public class SetCharacterRow : MonoBehaviour
     public Text characterName;
     public void setInformation(Character _character)
     {
-        characterName.text = _character.name;
+        characterName.text = _character.CharacterName;
     }
 }

@@ -12,14 +12,14 @@ GameObject:
   - component: {fileID: 8947212550469426009}
   - component: {fileID: 822954053257373153}
   - component: {fileID: 4741493785233858378}
-  - component: {fileID: 3588115298593020109}
+  - component: {fileID: 466947377318332145}
   m_Layer: 5
   m_Name: character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3960554663578548492
 RectTransform:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3588115298593020109
+--- !u!114 &466947377318332145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1615901025725730104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61326245bc5661141b37f049069f70c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 58ff0758677c52645b4f005c5073316e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: {fileID: 9198216732977374956}

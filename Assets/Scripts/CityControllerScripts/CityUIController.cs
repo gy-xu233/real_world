@@ -15,6 +15,8 @@ public class CityUIController : MonoBehaviour
     private List<Character> charactersInCity;
     private List<GameObject> characterRowCash;
     private int cityIndex;
+    public CharacterInformationPanelController infoPanel;
+
     private void Awake()
     {
         cityIndex = GameManagerSingleton.GetInstance.placeState;
@@ -24,7 +26,7 @@ public class CityUIController : MonoBehaviour
         City localCity = CityList.cityList[cityIndex];
         characterRowCash = new List<GameObject>();
         nameText.text = localCity.hanName;
-        background.sprite =Resources.Load<Sprite>("Image/" + localCity.pyName);
+        background.sprite =Resources.Load<Sprite>("Image/City/" + localCity.pyName);
         RefreshCharacterPanel();
     }
 
@@ -44,7 +46,13 @@ public class CityUIController : MonoBehaviour
                 temporaryGo = GameObject.Instantiate(tempGameObject, tempScrollRect.content);
                 characterRowCash.Add(temporaryGo);
             }
+            int temporaryCharacterIndex = charactersInCity[i].chaIndex;
             temporaryGo.GetComponent<SetCharacterRow>().setInformation(charactersInCity[i]);
+            temporaryGo.GetComponent<Button>().onClick.AddListener(()=>
+            {
+                infoPanel.SetPanel(temporaryCharacterIndex);
+                infoPanel.openPanel();
+            });
             temporaryGo.SetActive(true);
         }
         if(i < characterRowCash.Count)
@@ -54,15 +62,12 @@ public class CityUIController : MonoBehaviour
                 characterRowCash[i].SetActive(false);
             }
         }
-        Debug.Log("refresh panel");
     }
 
     public void changePanelEnabled()
     {
         tempScrollRect.gameObject.SetActive(!tempScrollRect.gameObject.activeSelf);
     }
-
-    
 
     public void LoadMapScene()
     {
