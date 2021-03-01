@@ -11,6 +11,7 @@ public class MainScenesController : MonoBehaviour
     private void Awake()
     {
         GameManagerSingleton.GetInstance.init();
+        MailManagerSingleton.GetInstance.init();
     }
     public void LoadTargetScene(int cityIndex)
     {

@@ -62,7 +62,7 @@ public class CharacterInformationPanelController : MonoBehaviour
     private void RefreshMessagePanel()
     {
         if (messageCash == null) messageCash = new List<GameObject>();
-        List<GameEventMessage> messageList = character.messagesReceived;
+        List<string> messageList = character.mailInCharacter;
         GameObject temporaryGo;
         int i;
         for (i = 0; i < messageList.Count; i++)
@@ -76,7 +76,7 @@ public class CharacterInformationPanelController : MonoBehaviour
                 temporaryGo = GameObject.Instantiate(tempGoInScroll, tempScrollRect.content);
                 messageCash.Add(temporaryGo);
             }
-            temporaryGo.GetComponent<Text>().text = messageList[i].messageContent;
+            temporaryGo.GetComponent<Text>().text = messageList[i];
             temporaryGo.SetActive(true);
         }
         if (i < messageCash.Count)

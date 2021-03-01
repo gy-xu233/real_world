@@ -43,7 +43,7 @@ public class TimeController : MonoBehaviour
         {
             if(character.state == Character.STATE.Idle)
             {
-                character.randomTarget = Random.Range(-10, 7);
+                character.randomTarget = Random.Range(-100, 7);
             }
         }
         dailyRefresh = new Thread(new ThreadStart(GameManagerSingleton.GetInstance.DailyRefresh));

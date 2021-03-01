@@ -19,10 +19,10 @@ public class GameManagerSingleton
 
 
     public int placeState;
-    public int timeYear;
-    public int timeMonth;
-    public int timeDay;
-    public int countDay;
+    public int timeYear;       //日
+    public int timeMonth;      //月
+    public int timeDay;        //日
+    public int timeCountDay;    // 游戏开始后的天数
     public string timeText;
     public List<Character> characterList;
     public Character characterPlayer;
@@ -36,7 +36,7 @@ public class GameManagerSingleton
             timeYear = 100;
             timeMonth = 1;
             timeDay = 1;
-            countDay = 1;
+            timeCountDay = 1;
             characterPlayer = RandomCharacter(0);
             timeText = timeYear.ToString() + "年" + timeMonth.ToString() + "月" + timeDay.ToString() + "日";
             for (int i = 0; i < 101; i++)
@@ -105,8 +105,14 @@ public class GameManagerSingleton
             }
         }
         characterPlayer.Tick();
+        RefreshTimeText();
+        MailManagerSingleton.GetInstance.RefreshMail();
+    }
+
+    private void RefreshTimeText()
+    {
         if (timeMonth == 1 || timeMonth == 3 || timeMonth == 5 || timeMonth == 7 ||
-            timeMonth == 8 || timeMonth == 10 || timeMonth == 12)
+           timeMonth == 8 || timeMonth == 10 || timeMonth == 12)
         {
             timeMonth = timeMonth + (timeDay + 1) / 32;
             timeDay = (timeDay + 1) % 32 + (timeDay + 1) / 32;
@@ -123,9 +129,8 @@ public class GameManagerSingleton
         }
         timeYear += timeMonth / 13;
         timeMonth = timeMonth % 13 + timeMonth / 13;
-        countDay++;
+        timeCountDay++;
         timeText = timeYear.ToString() + "年" + timeMonth.ToString() + "月" + timeDay.ToString() + "日";
     }
-
 
 }

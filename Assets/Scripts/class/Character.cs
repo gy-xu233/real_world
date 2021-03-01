@@ -21,8 +21,7 @@ public class Character
     public int arriveDuration;
     public int randomTarget;
     public List<ChacterRelationship> chacterRelation;
-    public List<GameEventMessage> messagesReceived;
-    private List<GameEventMessage> messagesOnTheWay;
+    public List<string> mailInCharacter;
 
 
 
@@ -37,9 +36,8 @@ public class Character
         state = STATE.Idle;
         arriveDuration = 0;
         randomTarget = -1;
-        
-        messagesReceived = new List<GameEventMessage>();     //TODO:写一个单调队列来装消息。
-        messagesOnTheWay = new List<GameEventMessage>();
+
+        mailInCharacter = new List<string>();
         characterImageIndex = Random.Range(1, 101);
         chacterRelation = new List<ChacterRelationship>();
     }
@@ -61,22 +59,8 @@ public class Character
 
     public void Tick()
     {
-        List<GameEventMessage> temporaryMessages = new List<GameEventMessage>();
-        int nowDay = GameManagerSingleton.GetInstance.countDay;
-        foreach (var eventMessage in messagesOnTheWay)
-        {
-            if((nowDay - eventMessage.outDay) * 2 >= CityList.cityDistance[eventMessage.outCityIndex, localPlaceIndex])
-            {
-                temporaryMessages.Add(eventMessage);
-            }
-        }
-        foreach (var eventmessage in temporaryMessages)
-        {
-            messagesReceived.Add(eventmessage);
-            Debug.Log(CharacterName + "在" + CityList.cityList[localPlaceIndex].hanName
-                + "前往" + CityList.cityList[targetPlaceIndex].hanName +  "的途中收到消息： " + eventmessage.messageContent);
-            messagesOnTheWay.Remove(eventmessage);
-        }
+        List<CharacterMail> temporaryMessages = new List<CharacterMail>();
+        int nowDay = GameManagerSingleton.GetInstance.timeCountDay;
 
         if(state == STATE.Running)
         {
@@ -85,7 +69,10 @@ public class Character
             {
                 state = STATE.Idle;                                //到达某地
                 localPlaceIndex = targetPlaceIndex;
-                sendArriveMessage(0, localPlaceIndex);
+
+                string cityMailContent = CharacterName + " 于 " + GameManagerSingleton.GetInstance.timeText + " 到达 " + 
+                    CityList.cityList[localPlaceIndex].hanName;
+                CityList.cityList[localPlaceIndex].sendMail(cityMailContent);
             }
         }
         else if(state == STATE.Idle)
@@ -95,23 +82,25 @@ public class Character
                 state = STATE.Running;
                 targetPlaceIndex = randomTarget;
                 arriveDuration = CityList.cityDistance[localPlaceIndex,targetPlaceIndex];
+                sendLeaveMail(localPlaceIndex, targetPlaceIndex);
             }
         }
     }
 
-    public void receiveCharacterMessage(GameEventMessage _message)
+    public void receiveCharacterMail(string mailContent)
     {
-        messagesOnTheWay.Add(_message);
+        mailInCharacter.Add(mailContent);
     }
 
-    private void sendArriveMessage(int _targetIndex, int _placeIndex)
+    private void sendLeaveMail(int _localPlaceIndex, int _targetPlaceIndex)
     {
-        int nowDay = GameManagerSingleton.GetInstance.countDay;
-        string content = CharacterName + " 于 " + GameManagerSingleton.GetInstance.timeText + " 到达 " + CityList.cityList[_placeIndex].hanName;
+        int nowDay = GameManagerSingleton.GetInstance.timeCountDay;
+        string content = CharacterName + " 于 " + GameManagerSingleton.GetInstance.timeText + " 从 " +
+            CityList.cityList[_localPlaceIndex].hanName + " 前往 " + CityList.cityList[_targetPlaceIndex].hanName;
         foreach (var t_relation in chacterRelation)
         {
-            GameManagerSingleton.GetInstance.characterList[t_relation.characterIndex].
-                receiveCharacterMessage(new GameEventMessage(_placeIndex, nowDay, content));
+            MailManagerSingleton.GetInstance.AddCharacterMail(new CharacterMail(chaIndex, 
+                t_relation.characterIndex, _localPlaceIndex, nowDay, content));
         }
     }
 }
