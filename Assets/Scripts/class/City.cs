@@ -38,6 +38,6 @@ public class City
     public void receiveMail(string mailContent)
     {
         mailContentInCity.Add(mailContent);
-        //Debug.Log(hanName + "的酒馆收到消息：   " + mailContent);
+        Debug.Log(hanName + "的酒馆收到消息：   " + mailContent);
     }
 }

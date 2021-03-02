@@ -30,7 +30,7 @@ public class TimeControllerInCity : MonoBehaviour
             if (dailyRefresh != null && dailyRefresh.ThreadState == ThreadState.Stopped)
             {
                 refreshTimeText();
-                uiController.RefreshCharacterPanel();
+                uiController.CloseAllPanel();
                 screenMask.SetActive(false);
                 timePause = true;
                 dailyRefresh.Abort();

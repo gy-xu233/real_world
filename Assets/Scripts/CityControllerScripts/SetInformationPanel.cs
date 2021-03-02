@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterInformationPanelController : MonoBehaviour
+public class SetInformationPanel : MonoBehaviour
 {
     private Character character;
     public Image characterImage;
@@ -89,14 +89,5 @@ public class CharacterInformationPanelController : MonoBehaviour
     }
 
 
-
-    public void openPanel()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void changePanelEnabled()
-    {
-        gameObject.SetActive(!gameObject.activeSelf);
-    }
+   
 }
