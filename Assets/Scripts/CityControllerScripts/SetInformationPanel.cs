@@ -62,7 +62,14 @@ public class SetInformationPanel : MonoBehaviour
     private void RefreshMessagePanel()
     {
         if (messageCash == null) messageCash = new List<GameObject>();
-        List<string> messageList = character.mailInCharacter;
+        List<string> messageList = new List<string>();
+        for (int j = 0; j < character.mailInCharacter.Length; j++)
+        {
+            if(character.mailInCharacter[j] != null)
+            {
+                messageList.Add(character.mailInCharacter[j].newsContent);
+            }
+        }
         GameObject temporaryGo;
         int i;
         for (i = 0; i < messageList.Count; i++)

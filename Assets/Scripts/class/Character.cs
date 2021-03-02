@@ -21,7 +21,7 @@ public class Character
     public int arriveDuration;
     public int randomTarget;
     public List<ChacterRelationship> chacterRelation;
-    public List<string> mailInCharacter;
+    public CharacterNews[] mailInCharacter;
 
 
 
@@ -37,7 +37,7 @@ public class Character
         arriveDuration = 0;
         randomTarget = -1;
 
-        mailInCharacter = new List<string>();
+        mailInCharacter = new CharacterNews[101];
         characterImageIndex = Random.Range(1, 101);
         chacterRelation = new List<ChacterRelationship>();
     }
@@ -88,9 +88,13 @@ public class Character
         }
     }
 
-    public void receiveCharacterMail(string mailContent)
+    public void receiveCharacterMail(CharacterNews mailContent)
     {
-        mailInCharacter.Add(mailContent);
+        int newIndex = mailContent.characterIndex;
+        if(mailInCharacter[newIndex] == null || mailInCharacter[newIndex].newsDay <= mailContent.newsDay)
+        {
+            mailInCharacter[newIndex] = mailContent;
+        }
     }
 
     private void sendLeaveMail(int _localPlaceIndex, int _targetPlaceIndex)
@@ -101,7 +105,7 @@ public class Character
         foreach (var t_relation in chacterRelation)
         {
             MailManagerSingleton.GetInstance.AddCharacterMail(new CharacterMail(chaIndex, 
-                t_relation.characterIndex, _localPlaceIndex, nowDay, content));
+                t_relation.characterIndex, _localPlaceIndex, nowDay, new CharacterNews(chaIndex,content,nowDay)));
         }
     }
 }

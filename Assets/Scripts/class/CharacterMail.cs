@@ -8,8 +8,8 @@ public class CharacterMail
     public int outDay;
     public int sendCharacter;
     public int receiveCharacter;
-    public string mailContent;
-    public CharacterMail(int _sendCharacter, int _receiveCharacter, int _outCityIndex, int _outDay, string _mailContent)
+    public CharacterNews mailContent;
+    public CharacterMail(int _sendCharacter, int _receiveCharacter, int _outCityIndex, int _outDay, CharacterNews _mailContent)
     {
         sendCharacter = _sendCharacter;
         receiveCharacter = _receiveCharacter;
