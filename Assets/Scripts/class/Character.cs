@@ -64,14 +64,15 @@ public class Character
 
         if(state == STATE.Running)
         {
-            if (arriveDuration > 0) arriveDuration--;
-            else
+            arriveDuration--;
+            if (arriveDuration == 0)
             {
                 state = STATE.Idle;                                //到达某地
                 localPlaceIndex = targetPlaceIndex;
 
-                string cityMailContent = CharacterName + " 于 " + GameManagerSingleton.GetInstance.timeText + " 到达 " + 
+                string cityMailContentString = CharacterName + " 于 " + GameManagerSingleton.GetInstance.timeText + " 到达 " + 
                     CityList.cityList[localPlaceIndex].hanName;
+                CharacterNews cityMailContent = new CharacterNews(chaIndex, cityMailContentString, nowDay);
                 CityList.cityList[localPlaceIndex].sendMail(cityMailContent);
             }
         }
@@ -81,8 +82,8 @@ public class Character
             {                                                          //    大于0则进入running状态，去下一个城市
                 state = STATE.Running;
                 targetPlaceIndex = randomTarget;
-                arriveDuration = CityList.cityDistance[localPlaceIndex,targetPlaceIndex];
-                sendLeaveMail(localPlaceIndex, targetPlaceIndex);
+                arriveDuration = CityList.cityDistance[localPlaceIndex,targetPlaceIndex];  
+                sendLeaveMail(localPlaceIndex, targetPlaceIndex);                              
             }
         }
     }

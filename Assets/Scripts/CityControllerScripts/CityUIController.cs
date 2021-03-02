@@ -29,16 +29,35 @@ public class CityUIController : MonoBehaviour
 
     public void ChangeChaPanelEnabled()
     {
-        chaListPanel.gameObject.SetActive(!chaListPanel.gameObject.activeSelf);
-        chaListPanel.CloseChaInfoPanel();
-        if(chaListPanel.gameObject.activeSelf == true)
+        if(chaListPanel.gameObject.activeInHierarchy == false)
         {
-            chaListPanel.RefreshCharacterPanel();
+            CloseAllPanel();
+            chaListPanel.gameObject.SetActive(true);
+            chaListPanel.RefreshPanel();
+        }
+        else
+        {
+            CloseAllPanel();
         }
     }
     
+    public void ChangeHotelPanelEnabled()
+    {
+        if (hotelPanel.gameObject.activeInHierarchy == false)
+        {
+            CloseAllPanel();
+            hotelPanel.gameObject.SetActive(true);
+            hotelPanel.RefreshPanel();
+        }
+        else
+        {
+            CloseAllPanel();
+        }
+    }
+
     public void CloseAllPanel()
     {
+        chaListPanel.CloseChaInfoPanel();
         chaListPanel.gameObject.SetActive(false);
         hotelPanel.gameObject.SetActive(false);
     }

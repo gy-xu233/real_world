@@ -78,8 +78,8 @@ public class MailManagerSingleton
 
     public void AddCityMail(CityMail _cityMail)
     {
-        int boxIndex = (CityList.cityDistance[_cityMail.receiveCityIndex, _cityMail.sendCityIndex] + 
-            maxDistanceBetweenCities - mailBoxOffset) % maxDistanceBetweenCities;
+        int mailIndex = CityList.cityDistance[_cityMail.receiveCityIndex, _cityMail.sendCityIndex] + 1;//因为每天的结算流程会将邮件天数 - 1，这样当天新加的邮件需要+1来抵消
+        int boxIndex = (mailIndex + maxDistanceBetweenCities - mailBoxOffset) % maxDistanceBetweenCities;
         //Debug.Log(_cityMail.mailContent + "  发送到  " + CityList.cityList[_cityMail.receiveCityIndex].hanName +
         //    "    index是： " + boxIndex.ToString() + "    offset是：" + mailBoxOffset.ToString());
         cityMailBoxManager[boxIndex].mailList.Add(_cityMail);

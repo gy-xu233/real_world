@@ -25,6 +25,7 @@ public class GameManagerSingleton
     public int timeCountDay;    // 游戏开始后的天数
     public string timeText;
     public List<Character> characterList;
+    public Dictionary<string, int> characterName2Index;
     public Character characterPlayer;
 
     public void init()
@@ -32,6 +33,7 @@ public class GameManagerSingleton
         if(characterList == null)
         {
             characterList = new List<Character>();
+            characterName2Index = new Dictionary<string, int>();
             placeState = 0;
             timeYear = 100;
             timeMonth = 1;
@@ -42,6 +44,11 @@ public class GameManagerSingleton
             for (int i = 0; i < 101; i++)
             {
                 Character temporaryCharacter = RandomCharacter(i);
+                while(characterName2Index.ContainsKey(temporaryCharacter.CharacterName))
+                {
+                    temporaryCharacter = RandomCharacter(i);
+                }
+                characterName2Index.Add(temporaryCharacter.CharacterName, i);
                 characterList.Add(temporaryCharacter);
                 CityList.cityList[temporaryCharacter.localPlaceIndex].addCharacter(characterList[i]);
             }
@@ -92,6 +99,7 @@ public class GameManagerSingleton
 
     public void DailyRefresh()
     {
+        RefreshTimeText();                                    //游戏世界刷新时间在每天早上，
         foreach (var city in CityList.cityList)
         {
             city.charactersInCity.Clear();
@@ -105,7 +113,6 @@ public class GameManagerSingleton
             }
         }
         characterPlayer.Tick();
-        RefreshTimeText();
         MailManagerSingleton.GetInstance.RefreshMail();
     }
 

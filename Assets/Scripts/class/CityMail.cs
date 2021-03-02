@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CityMail
 {
-    public string mailContent;
+    public CharacterNews mailContent;
     public int sendCityIndex;
     public int receiveCityIndex;
     public int outDay;
-    public CityMail(string _mailContent, int _sendCityIndex, int _receiveCityIndex, int _outDay)
+    public CityMail(CharacterNews _mailContent, int _sendCityIndex, int _receiveCityIndex, int _outDay)
     {
         mailContent = _mailContent;
         sendCityIndex = _sendCityIndex;
