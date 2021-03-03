@@ -22,7 +22,7 @@ public class Character
     public int randomTarget;
     public List<ChacterRelationship> chacterRelation;
     public CharacterNews[] mailInCharacter;
-
+    public CharacterDialogue testDialogue;
 
 
     public Character(int _chaIndex, string _xing, string _ming, int _cityIndex,int _gender)
@@ -37,6 +37,7 @@ public class Character
         arriveDuration = 0;
         randomTarget = -1;
 
+        testDialogue = new CharacterDialogue();
         mailInCharacter = new CharacterNews[101];
         characterImageIndex = Random.Range(1, 101);
         chacterRelation = new List<ChacterRelationship>();

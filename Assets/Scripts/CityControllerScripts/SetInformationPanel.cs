@@ -14,6 +14,7 @@ public class SetInformationPanel : MonoBehaviour
     /// </summary>
     public GameObject tempGo;
     public Transform tempFather;
+    public DialogueUIController dialogueController;
     private List<GameObject> relationCash;
 
     public GameObject tempGoInScroll;
@@ -27,6 +28,11 @@ public class SetInformationPanel : MonoBehaviour
         nameText.text = character.CharacterName;
         RefreshRelationPanel();
         RefreshMessagePanel();
+    }
+
+    public void ChatWithCharacter()
+    {
+        dialogueController.StartDialogue(character.testDialogue, character.characterImageIndex);
     }
 
     private void RefreshRelationPanel()

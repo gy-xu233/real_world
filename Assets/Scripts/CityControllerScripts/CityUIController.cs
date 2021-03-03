@@ -17,12 +17,9 @@ public class CityUIController : MonoBehaviour
     private void Awake()
     {
         cityIndex = GameManagerSingleton.GetInstance.placeState;
-    }
-    private void Start()
-    {
         City localCity = CityList.cityList[cityIndex];
         nameText.text = localCity.hanName;
-        background.sprite =Resources.Load<Sprite>("Image/City/" + localCity.pyName);
+        background.sprite = Resources.Load<Sprite>("Image/City/" + localCity.pyName);
     }
 
     

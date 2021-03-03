@@ -18,11 +18,6 @@ public class SetCharacterListPanel : MonoBehaviour
         characterRowCash = new List<GameObject>();
     }
 
-    private void Start()
-    {
-        RefreshPanel();
-    }
-
     public void RefreshPanel()
     {
         charactersInCity = CityList.cityList[cityIndex].charactersInCity;
